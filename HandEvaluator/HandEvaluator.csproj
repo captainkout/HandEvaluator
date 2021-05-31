@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>HandEvaluator</AssemblyName>
+    <RootNamespace>HoldemHand</RootNamespace>
+    <DocumentationFile>Documentation/$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+
+</Project>
