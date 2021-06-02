@@ -673,7 +673,7 @@ namespace HoldemHand
 				throw new ArgumentOutOfRangeException("mask");
 			return DescriptionFromMask(mask);
 #else
-            return DescriptionFromMask(mask);
+			return DescriptionFromMask(mask);
 #endif
 		}
 
@@ -1082,7 +1082,7 @@ namespace HoldemHand
 			if (cards <= 0 || cards > 7) throw new ArgumentException("mask");
 			return EvaluateType(mask, cards);
 #else
-            return EvaluateType(mask, BitCount(mask));
+			return EvaluateType(mask, BitCount(mask));
 #endif
 		}
 
@@ -1237,8 +1237,8 @@ namespace HoldemHand
 			uint n_dups = ((uint)(numberOfCards - n_ranks));
 
 			/* Check for straight, flush, or straight flush, and return if we can
-               determine immediately that this is the best possible hand 
-            */
+			   determine immediately that this is the best possible hand 
+			*/
 			if (n_ranks >= 5)
 			{
 				if (nBitsTable[ss] >= 5)
@@ -1277,21 +1277,21 @@ namespace HoldemHand
 				};
 
 				/* 
-                   Another win -- if there can't be a FH/Quads (n_dups < 3), 
-                   which is true most of the time when there is a made hand, then if we've
-                   found a five card hand, just return.  This skips the whole process of
-                   computing two_mask/three_mask/etc.
-                */
+				   Another win -- if there can't be a FH/Quads (n_dups < 3), 
+				   which is true most of the time when there is a made hand, then if we've
+				   found a five card hand, just return.  This skips the whole process of
+				   computing two_mask/three_mask/etc.
+				*/
 				if (retval != 0 && n_dups < 3)
 					return retval;
 			}
 
 			/*
-             * By the time we're here, either: 
-               1) there's no five-card hand possible (flush or straight), or
-               2) there's a flush or straight, but we know that there are enough
-                  duplicates to make a full house / quads possible.  
-             */
+			 * By the time we're here, either: 
+			   1) there's no five-card hand possible (flush or straight), or
+			   2) there's a flush or straight, but we know that there are enough
+				  duplicates to make a full house / quads possible.  
+			 */
 			switch (n_dups)
 			{
 				case 0:
@@ -1352,16 +1352,16 @@ namespace HoldemHand
 					};
 
 					/* Technically, three_mask as defined below is really the set of
-                       bits which are set in three or four of the suits, but since
-                       we've already eliminated quads, this is OK */
+					   bits which are set in three or four of the suits, but since
+					   we've already eliminated quads, this is OK */
 					/* Similarly, two_mask is really two_or_four_mask, but since we've
-                       already eliminated quads, we can use this shortcut */
+					   already eliminated quads, we can use this shortcut */
 
 					two_mask = ranks ^ (sc ^ sd ^ sh ^ ss);
 					if (nBitsTable[two_mask] != n_dups)
 					{
 						/* Must be some trips then, which really means there is a 
-                           full house since n_dups >= 3 */
+						   full house since n_dups >= 3 */
 						uint tc, t;
 						three_mask = ((sc & sd) | (sh & ss)) & ((sc & sh) | (sd & ss));
 						retval = HANDTYPE_VALUE_FULLHOUSE;
