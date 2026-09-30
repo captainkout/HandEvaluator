@@ -4,11 +4,10 @@ using Shouldly;
 using Xunit;
 using static HandEvaluator.Test.TestConsts;
 
-namespace HandEvaluator.Test
+namespace HandEvaluator.Test.Legacy
 {
     public class HandAnalysisTests
     {
-
         [Fact]
         public void HandOdds()
         {
@@ -41,7 +40,8 @@ namespace HandEvaluator.Test
             var villain = Hand.ParseHand("As Ad");
             var hero = Hand.ParseHand("Ks Kd");
 
-            Hand.OutsMask(hero, Hand.ParseHand("Qs 6s 2d"), new ulong[] { villain }).ShouldBe(Hand.ParseHand("Kh kc"));
+            Hand.OutsMask(hero, Hand.ParseHand("Qs 6s 2d"), new ulong[] { villain })
+                .ShouldBe(Hand.ParseHand("Kh kc"));
         }
 
         [Fact]
@@ -72,23 +72,29 @@ namespace HandEvaluator.Test
             Hand.GapCount(ulA2).ShouldBe(0);
             Hand.GapCount(ul46).ShouldBe(1);
         }
+
         [Fact]
         public void HandPlayerOpponentOdds()
         {
             var player = new double[9];
             var opponent = new double[9];
-            Hand.HandPlayerOpponentOdds(ulAK, 0ul, ref player,ref opponent);
+            Hand.HandPlayerOpponentOdds(ulAK, 0ul, ref player, ref opponent);
 
             // this is a precalced value for each handType (1=Pair)
             player[1].ShouldBe(0.295079403218692);
 
-
             // this should be 100% chance for quads(7) with roughly 10% tie, and zero for everything else
-            Hand.HandPlayerOpponentOdds(ulAK, Hand.ParseHand("2c 2d 2h 2s"), ref player, ref opponent);
+            Hand.HandPlayerOpponentOdds(
+                ulAK,
+                Hand.ParseHand("2c 2d 2h 2s"),
+                ref player,
+                ref opponent
+            );
 
             player.Where(d => d == 0.0).Count().ShouldBe(8);
             (player.Sum() + opponent.Sum()).ShouldBe(1);
         }
+
         [Fact]
         public void HandPotential()
         {

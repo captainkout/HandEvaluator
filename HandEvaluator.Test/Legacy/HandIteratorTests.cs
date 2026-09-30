@@ -4,7 +4,7 @@ using Shouldly;
 using Xunit;
 using static HandEvaluator.Test.TestConsts;
 
-namespace HandEvaluator.Test
+namespace HandEvaluator.Test.Legacy
 {
     public class HandIteratorTests
     {
@@ -20,15 +20,14 @@ namespace HandEvaluator.Test
         {
             var ac = Hand.Evaluate(ulAces, 2);
             // how many hands are worse or equal to As Ad. Should be all.
-            Hand.RandomHands(2, 100).Select(u =>
-            {
-                var ev = Hand.Evaluate(u, 2);
-                return ev;
-            }).Aggregate(0, (acc, val) =>
-                 Hand.Evaluate(ulAces, 2) >= val ? acc + 1 : acc
-
-                )
-            .ShouldBe(100);
+            Hand.RandomHands(2, 100)
+                .Select(u =>
+                {
+                    var ev = Hand.Evaluate(u, 2);
+                    return ev;
+                })
+                .Aggregate(0, (acc, val) => Hand.Evaluate(ulAces, 2) >= val ? acc + 1 : acc)
+                .ShouldBe(100);
         }
     }
 }

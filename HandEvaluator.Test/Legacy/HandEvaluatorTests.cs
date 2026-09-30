@@ -3,7 +3,8 @@ using HoldemHand;
 using Shouldly;
 using Xunit;
 using static HandEvaluator.Test.TestConsts;
-namespace HandEvaluator.Test
+
+namespace HandEvaluator.Test.Legacy
 {
     public class HandEvaluatorTests
     {
@@ -27,6 +28,7 @@ namespace HandEvaluator.Test
             h2.HandTypeValue.ShouldBe(Hand.HandTypes.StraightFlush);
             h3.HandTypeValue.ShouldBe(Hand.HandTypes.StraightFlush);
         }
+
         [Fact]
         public void ValidateHand()
         {
@@ -35,6 +37,7 @@ namespace HandEvaluator.Test
             Hand.ValidateHand("2d 2h").ShouldBeTrue();
             Hand.ValidateHand("Ak Ak Ah Ah Qs").ShouldBeFalse();
         }
+
         [Fact]
         public void ParseHand()
         {
@@ -45,21 +48,25 @@ namespace HandEvaluator.Test
             Hand.NextCard(hand, ref index).ShouldBe(Hand.ParseCard("Ac"));
             Hand.NextCard(hand, ref index).ShouldBe(Hand.ParseCard("2d"));
         }
+
         [Fact]
         public void DescriptionFromMask()
         {
             Hand.DescriptionFromMask(Hand.ParseHand("ad kd 2d kh qh 3h qc")).ShouldContain("Pair");
         }
+
         [Fact]
         public void DescriptionFromHand()
         {
             Hand.DescriptionFromHand("ad kd 2d kh qh 3h qc").ShouldContain("Pair");
         }
+
         [Fact]
         public void Evaluate()
         {
             Hand.Evaluate(ul46).ShouldBeLessThan(Hand.Evaluate(sAces));
         }
+
         [Fact]
         public void EqualOperator()
         {
@@ -70,6 +77,7 @@ namespace HandEvaluator.Test
             (h1 == h2).ShouldBeTrue();
             (h2 == h3).ShouldBeFalse();
         }
+
         [Fact]
         public void NotEqualOperator()
         {
@@ -80,6 +88,7 @@ namespace HandEvaluator.Test
             (h1 != h2).ShouldBeFalse();
             (h2 != h3).ShouldBeTrue();
         }
+
         [Fact]
         public void GTOrLTOperator()
         {
