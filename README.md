@@ -1,11 +1,17 @@
 # HandEvaluator
 
-Fast Texas Holdem hand evaluation and analysis. Pulled from [Fast Texas Holdem Hand Evaluation and Analysis](https://www.codeproject.com/Articles/12279/Fast-Texas-Holdem-Hand-Evaluation-and-Analysis) on CodeProject, with some basic tests added as examples, and then published to NuGet.
+[![NuGet](https://img.shields.io/nuget/v/Ck.HandEvaluator.svg)](https://www.nuget.org/packages/Ck.HandEvaluator)
+[![NuGet downloads](https://img.shields.io/nuget/dt/Ck.HandEvaluator.svg)](https://www.nuget.org/packages/Ck.HandEvaluator)
+[![CI](https://github.com/captainkout/HandEvaluator/actions/workflows/ci.yml/badge.svg)](https://github.com/captainkout/HandEvaluator/actions/workflows/ci.yml)
+
+Fast Texas Holdem hand evaluation and analysis. Pulled from [Fast Texas Holdem Hand Evaluation and Analysis](https://www.codeproject.com/Articles/12279/Fast-Texas-Holdem-Hand-Evaluation-and-Analysis) on CodeProject, with some basic tests added as examples, and then published to NuGet as [`Ck.HandEvaluator`](https://www.nuget.org/packages/Ck.HandEvaluator).
+
+> **Note:** the NuGet package ID is `Ck.HandEvaluator`; the assembly and root namespace remain `HandEvaluator` and `HoldemHand`. The unrelated `HandEvaluator` package on NuGet.org is owned by a different author.
 
 ## Installation
 
 ```bash
-dotnet add package HandEvaluator
+dotnet add package Ck.HandEvaluator
 ```
 
 ## Quick start
@@ -67,7 +73,7 @@ dotnet run --project HandEvaluator.SpeedTest -c Release -- --throughput --seed <
 
 ## API Reference
 
-This API reference is generated from the compiler documentation file at [`HandEvaluator/Documentation/HandEvaluator.xml`](HandEvaluator/Documentation/HandEvaluator.xml). That XML file is the source of truth and is also shipped with the NuGet package.
+This API reference is generated from the compiler documentation XML (`HandEvaluator.xml`) emitted by the build. That XML ships alongside the assembly in the NuGet package at `lib/net10.0/HandEvaluator.xml` and is the source of truth for this reference. See [`RELEASING.md`](RELEASING.md) for how releases are produced.
 
 ### Hand
 

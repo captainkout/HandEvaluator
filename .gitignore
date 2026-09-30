@@ -5,6 +5,10 @@ project.lock.json
 .pyc
 nupkg
 
+# Package build output / local validation feed
+artifacts/
+.local-feed/
+
 # Visual Studio Code
 .vscode
 

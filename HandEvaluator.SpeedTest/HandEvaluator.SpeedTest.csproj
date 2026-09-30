@@ -5,6 +5,7 @@
     <RootNamespace>HandEvaluator.SpeedTest</RootNamespace>
     <AssemblyName>HandEvaluator.SpeedTest</AssemblyName>
     <Nullable>disable</Nullable>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
