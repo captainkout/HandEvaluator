@@ -1,10 +1,62 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <AssemblyName>HandEvaluator</AssemblyName>
     <RootNamespace>HoldemHand</RootNamespace>
-    <DocumentationFile>Documentation/$(AssemblyName).xml</DocumentationFile>
+
+    <!-- Documentation: emit XML docs beside the assembly so NuGet packs them.
+         GenerateDocumentationFile defaults DocumentationFile to
+         $(OutputPath)$(AssemblyName).xml, which is packed to lib/net10.0/HandEvaluator.xml.
+         This replaces the old custom Documentation/$(AssemblyName).xml path so builds no
+         longer write into (or pollute) the source tree. -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <!-- Identity / discovery -->
+    <PackageId>Ck.HandEvaluator</PackageId>
+    <Authors>captainkout</Authors>
+    <Company>captainkout</Company>
+    <Product>HandEvaluator</Product>
+    <Copyright>Copyright (c) captainkout</Copyright>
+    <Description>Fast Texas Holdem hand evaluation and analysis. Port of the poker.eval / Keith Rule hand evaluator; exposes Hand.Evaluate, hand odds, outs, opponents' odds, hand iterators, and 169 pocket-hand helpers.</Description>
+    <PackageTags>poker;holdem;texas-holdem;hand-evaluator;cards;equity;odds;ranking</PackageTags>
+
+    <!-- License / links -->
+    <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/captainkout/HandEvaluator</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/captainkout/HandEvaluator.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+
+    <!-- Readme embedded in the package.
+         NOTE: no PackageIcon is declared because the repository has no icon asset;
+         adding a PackageIcon without the file would break `dotnet pack`. -->
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+
+    <!-- Symbols / source -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+    <!-- Reproducible builds -->
+    <Deterministic>true</Deterministic>
+    <!-- CI sets -p:ContinuousIntegrationBuild=true; local builds stay false. -->
+
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
+
+  <!-- Files placed at the package root -->
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\LICENSE" Pack="true" PackagePath="\" />
+    <None Include="..\COPYING" Pack="true" PackagePath="\" />
+    <None Include="..\COPYING.LESSER" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <!-- Tag-driven versioning + source link -->
+  <ItemGroup>
+    <PackageReference Include="MinVer" Version="8.0.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.401" PrivateAssets="all" />
+  </ItemGroup>
 
 </Project>
